@@ -1,11 +1,11 @@
-def confusion_matrix(X_test, Y_test, p):
+def confusion_matrix(target, prediction):
     TP = FP = FN = TN = 0
-    for i in range(len(X_test)):
-        if p[i] > 0.5 and Y_test[i] == 1:
+    for i in range(len(target)):
+        if prediction[i] > 0.5 and target[i] == 1:
             TP += 1
-        elif p[i] > 0.5 and Y_test[i] == 0:
+        elif prediction[i] > 0.5 and target[i] == 0:
             FP += 1
-        elif Y_test[i] == 1:
+        elif target[i] == 1:
             FN += 1
         else:
             TN += 1
@@ -19,10 +19,10 @@ def metrics(TP, FP, FN, TN, verbose):
     # Recall
     recall = TP/(TP+FN)
     # F1-Measure
-    f1_measure = 2*precision*recall/(precision+recall)
+    f1 = 2*precision*recall/(precision+recall)
     if verbose:
         print("Accuracy: " + str(accuracy))
         print("Precision: " + str(precision))
         print("Recall: " + str(recall))
-        print("F1 measure: " + str(f1_measure))
-    return accuracy, precision, recall, f1_measure
+        print("F1 measure: " + str(f1))
+    return accuracy, precision, recall, f1
